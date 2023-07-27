@@ -1,0 +1,39 @@
+esphome:
+  name: garage-motion
+  friendly_name: Garage Motion
+
+#enable project name
+  project:
+    name: "gote.poe_esp32"
+    version: "1.2.0"
+
+
+#enable ethernet
+ethernet:
+  type: LAN8720
+  mdc_pin: GPIO23
+  mdio_pin: GPIO18
+  clk_mode: GPIO17_OUT
+  phy_addr: 0
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "<insert encryption key here>"
+
+ota:
+  password: "<insert ota password here>"
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO32
+      mode: INPUT_PULLUP
+    name: "Motion"
