@@ -5,7 +5,7 @@ esphome:
 #enable project name
   project:
     name: "gote.poe_esp32"
-    version: "1.2.0"
+    version: "1.3.0"
 
 
 #enable ethernet
@@ -26,10 +26,10 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: "<insert encryption key here>"
+    key: ""
 
 ota:
-  password: "<insert ota password here>"
+  password: ""
 
 binary_sensor:
   - platform: gpio
@@ -37,3 +37,22 @@ binary_sensor:
       number: GPIO32
       mode: INPUT_PULLUP
     name: "Motion"
+i2c:
+  sda: GPIO14
+  scl: GPIO15
+  scan: True
+
+sensor:
+  - platform: bme280
+    temperature:
+      name: "${name} Temperature"
+      id: temperature
+      oversampling: 16x
+    pressure:
+      name: "${name} Pressure"
+      id: pressure
+    humidity:
+      name: "${name} Humidity"
+      id: humidity
+    address: 0x76
+    update_interval: 60s
